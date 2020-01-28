@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
    integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
@@ -24,6 +25,7 @@
     <title></title>
 </head>
 <body>
+    <div class="container">
      <div id="mapid"></div>
      <form action="{{url('/cari/my-location')}}" method="GET">
          <input type="text" id="latitude" name="latitude">
@@ -31,7 +33,7 @@
 
          <button type="submit">CARI</button>
      </form>
-
+    </div>
 
 
 
@@ -41,7 +43,7 @@
 <script>
 
     var mapCenter = [-8.2655356,113.3732593];
-    var map = L.map('mapid').setView(mapCenter, 13);
+    var map = L.map('mapid').setView(mapCenter, 18);
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -56,7 +58,22 @@
     function updateMarker(lat, lng) {
         marker
         .setLatLng([lat, lng])
-        .bindPopup("Your location :  " + marker.getLatLng().toString())
+        .bindPopup('<form>'+
+          '<div class="form-group">'+
+            '<label for="exampleInputEmail1">Email address</label>'+
+            '<input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">'+
+            '<small id="emailHelp" class="form-text text-muted">Well never share your email with anyone else.</small>'+
+          '</div>'+
+          '<div class="form-group">'+
+            '<label for="exampleInputPassword1">Password</label>'+
+            '<input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">'+
+          '</div>'+
+          '<div class="form-check">'+
+            '<input type="checkbox" class="form-check-input" id="exampleCheck1">'+
+            '<label class="form-check-label" for="exampleCheck1">Check me out</label>'+
+          '</div>'+
+          '<button type="submit" class="btn btn-primary">Submit</button>'+
+        '</form>')
         .openPopup();
         return false;
     };
